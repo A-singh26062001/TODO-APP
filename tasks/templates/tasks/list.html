@@ -1,0 +1,137 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+
+	body{
+		background-color: #638CB8;
+	}
+
+	input{
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+
+	input::placeholder {
+	  color: #d3d3d3;
+	}
+
+	.submit{
+		background-color: #6BA3E8;
+	}
+
+	.center-column{
+		width:600px;
+		margin: 20px auto;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 3px;
+		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	}
+
+	.item-row{
+		background-color: #eb6560;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 3px;
+		color: rgb(243, 237, 237);
+        font-family: 'Noto Serif Display', serif;
+		font-size: 20px;
+		box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+	}
+
+	.btn-danger{
+		background-color: #111010;
+		border-color: #f7f5f5;
+        border-radius: 5px;
+	}
+
+    *{padding: 0; margin: 0; box-sizing: border-box;}
+body{height: 200px;}
+header {
+	background: url("https://unsplash.com/photos/IcbiaQ8WjAw");
+	text-align: center;
+	width: 100%;
+	height: auto;
+	background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+	overflow: hidden;
+	border-radius: 0 0 85% 85% / 30%;
+}
+header .overlay{
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #333;
+  background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);
+	
+}
+
+h1 {
+	font-family: 'Dancing Script', cursive;
+	font-size: 80px;
+	margin-bottom: 30px;
+}
+
+h3, p {
+	font-family: 'Open Sans', sans-serif;
+	margin-bottom: 30px;
+}
+
+button {
+	border: none;
+	outline: none;
+	padding: 10px 20px;
+	border-radius: 50px;
+	color: #333;
+	background: #fff;
+	margin-bottom: 50px;
+	box-shadow: 0 3px 20px 0 #0000003b;
+}
+button:hover{
+	cursor: pointer;
+}
+</style>
+
+<header>
+	<div class="overlay">
+<h1>Todo App</h1>
+<!-- <h3>Reasons for Choosing US</h3>
+<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero nostrum quis, odio veniam itaque ullam debitis qui magnam consequatur ab. Vero nostrum quis, odio veniam itaque ullam debitis qui magnam consequatur ab.</p>
+	<br>
+	<button>READ MORE</button> -->
+		</div>
+</header>
+
+
+
+
+
+<div class="center-column">
+    <form method="POST" actions="/">
+        {% csrf_token %}
+        {{form.title}}
+        <input class="btn btn-info" type="Submit" name="Create Task"> 
+    </form>
+    
+    
+    <div class="todo-list">
+        {% for task  in tasks %}
+        <div class="item-row">
+            <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a>
+            <a class="btn btn-sm btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+            {% if task.complete == True %}
+            <strike>{{task}}</strike>
+            {% else %}
+            <span>{{task}}</span> 
+            {% endif %}
+        </div>
+    
+        {% endfor %}
+    </div>
+    
+</div>
+
